@@ -1,0 +1,14 @@
+[nginx]
+nginx01
+nginx02
+
+[haproxy]
+lb01
+
+[mariadb]
+
+[ipa]
+
+[various]
+
+
