@@ -2,11 +2,10 @@
 # Common tasks for hosts within my private infrastructure. 
 
 - name: Fetch and apply updates
-  yum: name=* state=latest
-  sudo: true
+  package: name=* state=latest
   
-- name: Install common packages
-  yum: name="{{ item }}" state=installed
+  - name: Install common packages
+  package: name="{{ item }}" state=installed
   with_items:
     - epel-release
     - tmux
@@ -18,28 +17,24 @@
     - libsemanage-python
     - policycoreutils-python
     - bash-completion
-    sudo: true
 
 - name: Install Open-VM-Tools on VMWare based machines.
-  yum: name="open-vm-tools" state=installed
+  package: name=open-vm-tools state=installed
   when: ansible_virtualization_type == "VMware"
-  sudo: true
 
 - name: Add SSH key to local "deploy" user
-  authorized_key: user=deploy key="{{ item }}"
+  authorized_key: user=luke key="{{ item }}"
   with_items: 
     # Luke H. Flynn
     - https://raw.githubusercontent.com/LukeFlynn/dotfiles/master/ssh/id_rsa.pub  
-  sudo: true
-
+- name: Disable password authentication
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+  
 - name: Reboot all machines
-  shell: sleep 2 && shutdown -r now "Reboot triggered by Ansible: applying updates"
+  shell: sleep 2 && shutdown -r now "Reboot triggered by Ansible.. applying updates"
   async: 1
   poll: 0
-  sudo: true
   ignore_errors: true
-
 
 - name: Waiting for reboot to complete
   local_action: wait_for host={{ inventory_hostname }} state=started delay=30 timeout=300
-  sudo: false
