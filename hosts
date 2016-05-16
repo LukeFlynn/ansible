@@ -1,14 +1,13 @@
-[nginx]
-nginx01
-nginx02
+#[nginx]
+#nginx01
+#nginx02
 
-[haproxy]
-lb01
+#[haproxy]
+#lb01
 
 [mariadb]
 
 [ipa]
 
 [various]
-
-
+10.0.0.18
