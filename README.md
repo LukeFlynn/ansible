@@ -2,7 +2,7 @@
 
 This repo hosts various playbooks that I might use personally, or for work purposes.
 
-[personal](tree/master/personal/): For my personal infrastructure.
+[personal](https://github.com/LukeFlynn/ansible/tree/master/personal): For my personal infrastructure.
 
 
-[work](tree/master/work): To be used for my future endeavors. 
+[work](https://github.com/LukeFlynn/ansible/tree/master/personal): To be used for my future endeavors. 
